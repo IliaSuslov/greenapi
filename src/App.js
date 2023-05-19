@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { SideMenu, MainMenu, MessagesPage, LoginForm } from "./components";
+import { useState } from "react";
+import { useStoreon } from "storeon/react";
 
 function App() {
+  const { dispatch, appState } = useStoreon("appState");
+  const [selectedUser, selectUser] = useState();
+  const handleCreateNewChatWithUser = (phone) => {
+    dispatch("setNewChat", {
+      name: phone,
+    });
+  };
+  const handleUserSetlect = (index) => {
+    selectUser(index + 1);
+  };
+
+  if (!appState?.isLoggedIn)
+    return (
+      <div className="h-screen flex justify-center">
+        <LoginForm />
+      </div>
+    );
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SideMenu
+        users={appState.users}
+        onEnterPress={handleCreateNewChatWithUser}
+        onUserSetlect={handleUserSetlect}
+      />
+      {selectedUser ? (
+        <MessagesPage
+          user={appState.users?.[selectedUser - 1]}
+          id={selectedUser - 1}
+        />
+      ) : (
+        <MainMenu />
+      )}
     </div>
   );
 }
