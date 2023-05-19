@@ -10,7 +10,10 @@ import {
 import { clearLocalStore } from "../../helpers/functions";
 import { Input } from "../index";
 
-export function SideMenu({ users, onEnterPress, onUserSetlect }) {
+export function SideMenu({ users, onEnterPress, onUserSelect }) {
+  const onUserSelectHandler = (i) => {
+    return () => onUserSelect(i);
+  };
   return (
     <div className="w-1/3 bg-gray-700 border-r">
       <div className="bg-gray-500 flex justify-between items-center p-2">
@@ -38,7 +41,7 @@ export function SideMenu({ users, onEnterPress, onUserSetlect }) {
         return (
           <div
             key={i}
-            onClick={() => onUserSetlect(i)}
+            onClick={onUserSelectHandler(i)}
             className="flex items-center gap-4 p-2 bg-gray-700 hover:bg-sky-700 active:bg-sky-700 border-b"
           >
             <UserCircleIcon className="h-12 w-12" />

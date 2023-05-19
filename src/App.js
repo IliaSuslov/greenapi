@@ -11,7 +11,7 @@ function App() {
       name: phone,
     });
   };
-  const handleUserSetlect = (index) => {
+  const handleUserSelect = (index) => {
     selectUser(index + 1);
   };
 
@@ -26,7 +26,7 @@ function App() {
       <SideMenu
         users={appState.users}
         onEnterPress={handleCreateNewChatWithUser}
-        onUserSetlect={handleUserSetlect}
+        onUserSelect={handleUserSelect}
       />
       {selectedUser ? (
         <MessagesPage

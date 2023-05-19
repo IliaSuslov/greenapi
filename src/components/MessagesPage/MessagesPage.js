@@ -29,11 +29,7 @@ export function MessagesPage({ user, id }) {
     <div className="w-2/3 bg-gray-700 flex flex-col">
       <div className="h-16 border-b-2 flex row justify-between p-2 ">
         <div className="flex row items-center gap-5">
-          {user?.avatar ? (
-            user.avatar
-          ) : (
-            <UserCircleIcon className="h-12 w-12" />
-          )}
+          <UserCircleIcon className="h-12 w-12" />
           {user?.name}
         </div>
         <div className="flex row items-center gap-5">
